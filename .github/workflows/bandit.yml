@@ -19,9 +19,4 @@ jobs:
         run: pip install bandit
 
       - name: Run Bandit Scan
-        uses: shundor/bandit-action@v1
-        with:
-          path: "."                
-          level: high            
-          confidence: high        
-          exit_zero: true   
+        run: bandit -r . --severity-level high --confidence-level high || true
