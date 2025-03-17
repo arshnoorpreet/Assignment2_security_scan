@@ -1,7 +1,7 @@
 ---
-name: Lint
+name: Super Linter
 
-on: 
+on:
   push:
   pull_request:
 
@@ -26,4 +26,5 @@ jobs:
       - name: Run Super-Linter
         uses: super-linter/super-linter@v7.3.0
         env:
+          
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
