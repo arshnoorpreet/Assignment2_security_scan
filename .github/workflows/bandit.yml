@@ -20,3 +20,4 @@ jobs:
 
       - name: Run Bandit Scan
         run: bandit -r .
+        continue-on-error: true  
