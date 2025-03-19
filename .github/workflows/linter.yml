@@ -13,8 +13,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Super-Linter
-        uses: super-linter/super-linter@v5
+      - name: Run Super-Linter
+        uses: github/super-linter@v5
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for linting errors
+        if: failure()  # This step will only run if the previous one failed
+        run: |
+          echo "Linting issues were detected. Please see the summary report."
+          cat super-linter-output/super-linter-summary.md  # Display the summary
