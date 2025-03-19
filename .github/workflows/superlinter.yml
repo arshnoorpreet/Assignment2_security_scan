@@ -1,4 +1,3 @@
----
 name: Super Linter
 
 on:
@@ -24,7 +23,14 @@ jobs:
           fetch-depth: 0 
 
       - name: Run Super-Linter
-        uses: super-linter/super-linter@v7.3.0
+        uses: github/super-linter@v7.3.0
         env:
-          
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main  # Specify your default branch if not 'main' 
+
+      - name: Check for linting errors
+        if: failure()
+        run: |
+          echo "Linting issues were detected. Please see summary report."
+          cat super-linter-output/super-linter-summary.md  # Display the summary
+
