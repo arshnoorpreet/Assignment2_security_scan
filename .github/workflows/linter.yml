@@ -1,26 +1,30 @@
-name: Lint Code Base
+---
+name: Linter Job
 
 on:
   push:
+    branches: 
+      - main
   pull_request:
+    branches: 
+      - main
 
 jobs:
-  build:
-    name: Lint Code Base
+  lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Run Super-Linter
+      - name: Run Linter
         uses: github/super-linter@v5
         env:
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: main
 
       - name: Check for linting errors
-        if: failure()  # This step will only run if the previous one failed
+        if: failure()
         run: |
           echo "Linting issues were detected. Please see the summary report."
-          cat super-linter-output/super-linter-summary.md  # Display the summary
+          cat super-linter-output/super-linter-summary.md
