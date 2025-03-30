@@ -19,14 +19,6 @@ jobs:
 
       - name: Run Linter
         uses: github/super-linter@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BRANCH: main
-          # Exclude certain linters
-          ENABLE_JAVASCRIPT_STANDARD: false  # Disable JavaScript Standard Linter to avoid JS linting errors
-          ENABLE_PYTHON_BLACK: true          # Enable Black if you want to format the Python code
-          ENABLE_PYTHON_FLAKE8: false        # Disable Flake8 to avoid errors
-          ENABLE_PYTHON_ISORT: false         # Disable isort to avoid errors
 
       - name: Check for linting errors
         if: failure()
