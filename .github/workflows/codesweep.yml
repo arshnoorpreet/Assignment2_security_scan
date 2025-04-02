@@ -1,16 +1,17 @@
-name: "AppScan CodeSweep"
-on:
-  pull_request:
-    types: [opened,synchronize]
+name: AppScan CodeSweep
+
+on: [push, pull_request]
+
 jobs:
-  scan:
+  code-scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
         with:
-          fetch-depth: 0
+          java-version: '17'
       - name: Run AppScan CodeSweep
-        uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v2.1
-    env: 
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v1
+        with:
+          projectDirectory: "."
